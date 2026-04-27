@@ -1,0 +1,61 @@
+"""
+开发一个购物车管理系统，使用字典存储商品数据，通过控制台菜单交互。具体功能：
+
+1. 添加购物车：录入商品名称、价格、数量，保存到购物车。
+2. 修改购物车：输入要修改的商品名称，然后更新该商品的价格和数量。
+3. 删除购物车：输入要删除的商品名称，从购物车中删除该商品。
+4. 查询购物车：展示所有商品信息，格式为：商品名称: xxx, 商品价格: xxx, 商品数量: xxx。
+5. 退出购物车：退出系统。
+"""
+menu = """
+############ 购物车系统 ############
+#          1. 添加购物车           #
+#          2. 修改购物车           #
+#          3. 删除购物车           #
+#          4. 查询购物车           #
+#          5. 退出购物车           #
+###################################
+"""
+shooping_cart = {}
+
+while True:
+    print(menu)
+    choic = input("请选择操作(1-5)")
+    match choic:
+        # 1. 添加购物车：录入商品名称、价格、数量，保存到购物车。
+        case "1":
+            goods_name = input("请输入商品名称")
+            if goods_name in shooping_cart:
+                print("商品已存在,请重新选择操作")
+                continue
+            else:
+                goods_price = float(input("请输入商品价格:"))
+                goods_num = int(input("请输入商品数量:"))
+            shooping_cart[goods_name] = {"price":goods_price, "num":goods_num}
+        case "2":
+            # 2.修改购物车：输入要修改的商品名称，然后更新该商品的价格和数量。
+            goods_name = input("请输入商品名称")
+            if goods_name not in shooping_cart:
+                print("商品不存在,请重新选择操作")
+                continue
+            else:
+                goods_price = float(input("请输入商品价格:"))
+                goods_num = int(input("请输入商品数量:"))
+            shooping_cart[goods_name] = {"price": goods_price, "num": goods_num}
+        case "3":
+            #3.删除购物车：输入要删除的商品名称，从购物车中删除该商品。
+            goods_name = input("输入要删除的商品名称")
+            if goods_name in shooping_cart:
+                del shooping_cart[goods_name]
+            else:
+                print("商品不存在,请重新选择操作")
+        case "4":
+            # 4.查询购物车：展示所有商品信息，格式为：商品名称: xxx, 商品价格: xxx, 商品数量: xxx。
+            for goods_name in shooping_cart.keys():
+                godds_info = shooping_car[goods_name]
+                print(f"商品名称:{goods_name},商品价格:{godds_info["price"]},商品数量:{godds_info["num"]}")
+        case "5":
+            print("bye")
+            break
+        case _:
+            print("操作不合法")
